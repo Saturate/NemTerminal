@@ -37,7 +37,10 @@ jQuery(document).ready(function($) {
                 name: 'password',
                 keydown: function(event, terminal) {
                 	console.log(event, terminal);
-                	return false;
+                    if(event.keyCode !== 13) {
+                        document.querySelector('#password').value += 
+                        return false;    
+                    }
                 }
             });
         } else if (command == 'about') {
