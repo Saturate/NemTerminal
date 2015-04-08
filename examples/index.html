@@ -17,24 +17,53 @@
     <style type="text/css">
         #debug-inputs {
             position: absolute;
-            left: 270px;
+            right: 20px;
             font-family: FreeMono, monospace;
             font-size: 12px;
             z-index: 60;
             color: #fff;
         }
     </style>
+
+    <script>
+        var clicks = 0 ;
+        $(document).on('click', '.Box-Button-Submit', function (e) {
+            e.preventDefault();
+            console.log('Triggered click on Box-Button-Submit.');
+
+            if(clicks === 0) {
+                setTimeout(function() {
+                    $('body').append('<div class="Box-Content"><div class="otp"></div></div>');
+                }, 2000)
+            }
+        });
+    </script>
    
   </head>
 <body>
     <div id="debug-inputs">
         <p>
             Username
-            <input type="text" id="userid">
+            <input type="text" class="person" id="userid">
         </p>
         <p>
             Password
             <input type="password" id="password"> 
+        </p>
+        <p>
+            Pin Key
+            <input class="PIN" type="text" id="544367536jyjkfgukfuk5trandom"> 
+        </p>
+
+        <div>
+            PIN #:
+            <div id="keyhelp"></div>
+            <div>
+                <label>1234</label>
+            </div>
+        </div>
+        <p>
+            <button class="Box-Button-Submit">Test Button</button>
         </p>
     </div>
 </body>
