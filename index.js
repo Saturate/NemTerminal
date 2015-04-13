@@ -1,5 +1,3 @@
-// https://www.portalprotect.dk/demologinnemidjs.jsp
-
 (function ($) {
 
 /**
@@ -27,21 +25,60 @@ $.fn.waitUntilExists = function (handler, shouldRunHandlerOnce, isChild) {
     }
 
     return $this;
-}
+};
 
 }(jQuery));
 
 
-jQuery(document).ready(function($) {
-    var events;
+function passwordTerminal(command, term) {
+    $('.Box-Button-Submit').click();
+
+    if($('.error_txt').text() === "Fejl i bruger-id eller adgangskode.") {
+        term.echo("Error logging in, please try again.");
+        return false;
+    }
+
+    $(document).on('pin-step-ready', function() {
+        console.log('Change terminal to PIN input');
+
+        var cardNumber = $('.Keyheader').prev().text();
+        var pinNeeded = $('#keyhelp').next().find('label').text();
+
+        term.echo("Active keycard is " + cardNumber);
+        term.echo("Please enter key for # " + pinNeeded);
+        
+        term.push(function(command) {
+            $('.PIN').val(command);
+
+            // Emulate click on the "logon button"
+            $('.Box-Button-Submit').click();
+        }, {
+            prompt: 'PIN> ',
+            name: 'pin'
+        });
+    });
+}
+
+// https://www.portalprotect.dk/demologinnemidjs.jsp
+// Signtext: 
+// - plain: $('.TextWrapper textarea').val();
+// - HTML (iframe): $('.gwt-Frame')
+
+var settings = {
+    header: "#################################### \n#      Secure NemID Terminal      #\n####################################"
+};
+
+jQuery(function($) {
     // Prepend the terminal DOM nodes
     $('body').prepend('<div id="nemid-terminal"></div><div id="nemid-terminal-scanlines"></div>');
 
+    // The ".step1" class is an indicator that nemid is loaded and you can enter usern & pass.
     $('.step1').waitUntilExists(function() {
         console.log('Step one is ready...');
     });
 
-    $('.Box-Content .otp').waitUntilExists(function() {
+    // The .otp class is the box fot the 2FA key
+    $('.otp').waitUntilExists(function() {
         console.log('Step otp is ready...');
         $(document).trigger('pin-step-ready');
     });
@@ -51,19 +88,16 @@ jQuery(document).ready(function($) {
         var command = rawCommand.split(' ')[0];
         var args = rawCommand.split(" ").slice(1);
 
-        if (command == 'help') {
+        if (command === 'help') {
             term.echo('Available commands are:');
            	term.echo('shutdown\t\t\t (closes the terminal, use a page refresh to get it back.)');
            	term.echo('login %username%\t (Starts logging in to the site with nemid.)');
            	term.echo('about\t\t\t\t(Shows information about this add-on.)');
            	term.echo('help\t\t\t\t (Shows this help, awesome.)');
-        } else if (command == 'site') {
-            if (document.referrer) {
-                term.echo("Current site is " + document.referrer);
-            } else {
-                term.echo("No referrer found. ");
-            }
-        } else if (command == 'login') {
+        } else if (command === 'site') {
+            var site = document.referrer ? "Current site is " + document.referrer : "No referrer found."; 
+            term.echo(site);
+        } else if (command === 'login') {
             var $user = $('.input-2.person, #userid');
             var $password = $('[type="password"]');
             
@@ -73,36 +107,8 @@ jQuery(document).ready(function($) {
 
             console.log('Entered username: ' + args[0]);
 
-            term.push(function(command, term) {
-                $('.Box-Button-Submit').click();
-
-                if($('.error_txt').text() === "Fejl i bruger-id eller adgangskode.") {
-                    term.echo("Error logging in, please try again.");
-                    return false;
-                }
-
-                $(document).on('pin-step-ready', function() {
-                    console.log('Change terminal to PIN input');
-
-                    var cardNumber = $('.Keyheader').prev().text();
-                    var pinNeeded = $('#keyhelp').next().find('label').text();
-
-                    term.echo("Active keycard is " + cardNumber);
-                    term.echo("Please enter key for # " + pinNeeded);
-                    
-                    term.push(function(command, term) {
-                        $('.PIN').val(command);
-
-                        // Emulate click on the "logon button"
-                        $('.Box-Button-Submit').click();
-                    }, {
-                        prompt: 'PIN> ',
-                        name: 'pin'
-                    });
-                });
-
-            }, {
-                prompt: '>',
+            term.push(passwordTerminal, {
+                prompt: '> ',
                 name: 'password',
                 keydown: function(event, terminal) {
                 	console.log('Password: ', String.fromCharCode(event.keyCode));
@@ -113,9 +119,9 @@ jQuery(document).ready(function($) {
                 }
             });
 
-        } else if (command == 'about') {
+        } else if (command === 'about') {
             term.echo("The Terminal Interface for NemID is brought to you by Allan Kimmer Jensen");
-        } else if (command == 'shutdown') {
+        } else if (command === 'shutdown') {
             term.echo("Shutting down terminal...");
             setTimeout(function(){
 				$('#nemid-terminal, #nemid-terminal-scanlines').hide(200);
@@ -124,14 +130,13 @@ jQuery(document).ready(function($) {
             term.echo("unknow command " + command);
         }
     }, {
-        greetings: "#################################### \n#      Secure NemID Terminal      #\n####################################",
+        greetings: settings.header,
         prompt: '> ',
         onClear: function(term) {
-        	term.echo("#################################### \n#      Secure NemID Terminal      #\n####################################");
+        	term.echo(settings.header);
         },
         onBlur: function() {
-            // prevent loosing focus
-            return false;
+            return false; // prevent loosing focus
         }
     });
 });
