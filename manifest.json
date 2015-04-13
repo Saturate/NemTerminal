@@ -6,17 +6,18 @@
 	"description": "Makes loggin in to NemID more Terminalish.",
 
 	"content_scripts": [
-	    {
-	      "matches": ["https://appletk.danid.dk/*","https://applet.danid.dk/*","http://vegas.trunk.challenger.dk/test/*"],
-	      "css": ["css/jquery.terminal.css","css/main.css"],
-	      "js": [
-	      	"js/jquery-1.7.1.min.js",
-	      	"js/jquery.mousewheel-min.js",
-	      	"js/jquery.terminal-min.js",
-	      	"index.js"
-	      ],
-	      "run_at": "document_start",
-	      "all_frames": true
-	    }
+		{
+			"matches": ["https://appletk.danid.dk/*", "https://applet.danid.dk/*"],
+			"exclude_matches": ["https://appletk.danid.dk/developers/examples/*", "https://appletk.danid.dk/resources/generic/web/viewer*"],
+			"css": ["css/jquery.terminal.css","css/main.css"],
+			"js": [
+				"js/jquery-1.7.1.min.js",
+				"js/jquery.mousewheel-min.js",
+				"js/jquery.terminal-min.js",
+				"index.js"
+		  	],
+			"run_at": "document_start",
+			"all_frames": true
+		}
 	  ]
 }
