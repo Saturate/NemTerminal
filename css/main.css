@@ -2,7 +2,7 @@
 	color: #0DE808;
 }
 #nemid-terminal {
-	  opacity: 0.6; /* for DEBUG  */
+	/*  opacity: 0.6;  for DEBUG  */
 	cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAXCAYAAAAC9s/ZAAAACXBIWXMAAAsTAAALEwEAmpwYAAABNmlDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjarY6xSsNQFEDPi6LiUCsEcXB4kygotupgxqQtRRCs1SHJ1qShSmkSXl7VfoSjWwcXd7/AyVFwUPwC/0Bx6uAQIYODCJ7p3MPlcsGo2HWnYZRhEGvVbjrS9Xw5+8QMUwDQCbPUbrUOAOIkjvjB5ysC4HnTrjsN/sZ8mCoNTIDtbpSFICpA/0KnGsQYMIN+qkHcAaY6addAPAClXu4vQCnI/Q0oKdfzQXwAZs/1fDDmADPIfQUwdXSpAWpJOlJnvVMtq5ZlSbubBJE8HmU6GmRyPw4TlSaqo6MukP8HwGK+2G46cq1qWXvr/DOu58vc3o8QgFh6LFpBOFTn3yqMnd/n4sZ4GQ5vYXpStN0ruNmAheuirVahvAX34y/Axk/96FpPYgAAACBjSFJNAAB6JQAAgIMAAPn/AACA6AAAUggAARVYAAA6lwAAF2/XWh+QAAABXUlEQVR42pSUS07DMBCGv7FMXxIPwZIbILHlHByVJSy65Qwco1RQ2pJ4WPQfSKM0CZZGiR3P538m4zEOwxrmDRscZm7u5hkIK0AFVO7ux5utGwDg5lfAQoAtsAGq+F4onYAkZ8xtBVwA10DAsptbXwgpXgR5k/PNWEhqTgR57YJYl/42oAFZdkH0l/oB/4WkU7GNhaS+DI+BpKFKG4KcBJjbr2m+BGZyngUgt51UeHH6o+5EBXzp6VKejhTI+SFOlPQnoAa+gU9gBbxHmQOeGs63WmyPWHNgLyXbI4Cbz7WwcfO7lopnZTxLdtzWGvD4HRNgB6y1oWvMgXPJ32ufRw5qyVoDazeftlS8SMFCNokSyIWCYUWJqnq6kctxBpwJUGcAdR7/K8+EmydzK1Jxr15RIvbYm0/c0gP30OrmwKUUAnw0coAN9UzFPpV85LyLcG1M421UHjq5RBg/AwDSq638fOpiDgAAAABJRU5ErkJggg=='), auto;
 	font-family: FreeMono, monospace;
 	font-size: 12px;
@@ -12,7 +12,7 @@
 	width: 100%;
 	height: 100%;
 	background: #000;
-	z-index: 2;
+	z-index: 9999998; /* We really want this to be on top! */
 }
 #nemid-terminal-scanlines {
 	position: absolute;
@@ -23,8 +23,8 @@
 	background: transparent url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAQAAAAziH6sAAAC52lDQ1BpY20AAHicY2BgnuDo4uTKJMDAUFBUUuQe5BgZERmlwH6egY2BmQEMEpOLCxwDAnxA7Lz8vFQGDPDtGgMjiL6sCzILUx4vYE0GWgykDwCxUUpqcTKQ/gLE6eUlBUBxxhggWyQpG8wuALGzQ4KcgewWBgYmnpLUCpBeBuf8gsqizPSMEgVDS0tLBceU/KRUheDK4pLU3GIFz7zk/KKC/KLEktQUoFqoHSDA65JfouCemJmnYGiqSqK7CQJQOEJYiPBBiCFAcmlRGYQFViTAoMXgx1DJsIrhAaM0YxTjPManTIZMDUyXmDWYG5nvstiwzGNlZs1mvcrmxLaJXYV9JocARycnK2czFzNXGzc390QeKZ6lvMa8h/iC+Z7xVwsICawWdBN8JNQorCh8WCRdlFd0q1icOKf4VokUSWHJo1IV0rrST2TmyIbKCcqdle9R8FHkVbygNEU5SkVJ5bXqVrVGdT8NWY23mvu0Jmqn6ljrCum+0juiP9+gxjDKyNJY0vi3yT3Tw2YrzPstKiwTrXysLWxUbUXsWOy+2j93uO14wemY816Xra7r3Va6L/VY5LnQa4H3Qp/Fvsv8VvmvD9gauDfoWPD5kFuhz8K+RDBFCkYpRRvHuMVGxeXFtyTMTtycdDb5eSpTmly6TUZUZlXWrOw9OffymPLVC3wKi4tmFx8ueVsmUe5SUVg5r+ps9d9avbr4+kkNxxp/Nxu0pLfOa7veIdjp3dXefbiXoc++v27Cvon/JztOaZ16YjrvjOCZs2Y9mqM1t2TevgVcC8MWLV78canDsgnLH640XtW6+uZa3XVN629uNNjUsfnBVqttU7d/2Om7a9Uejr3p+44fUD/Yeej1Eb+jm4+Ln6g9+eS095kt52TPt1/4dCnu8qmrFteW3RC92Xrr6530uzfv+zw48Mj08eqnis9mvhB82fWa+U3d25/vSz98+lTw+d3XvG/vfuT//PC7+M+3f1X//wMAKr8divuDGykAAAAOSURBVAgdY2CIZPjPAAADaAFZ/RlnNAAAAABJRU5ErkJggg==') repeat fixed center;
 	margin: 0;
 	padding: 0;
-	z-index: 3;
-	pointer-events: none;
+	z-index: 9999999; /* We really want this to be on top! and alsp above nemid-terminal */
+	pointer-events: none; /* Clicks on this is passed on */
 }
 #nemid-terminal * {
 	font-family: FreeMono, monospace;
@@ -37,7 +37,7 @@
 .terminal .inverted,
 .cmd .inverted, .cmd .cursor.blink {
 	background-color: #0DE808 !important;
-	color: rgb(0, 0, 0) !important;
+	color: #0DE808 !important;
 }
 
 .gradient_layer {
