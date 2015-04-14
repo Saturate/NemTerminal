@@ -33,8 +33,8 @@ $.fn.waitUntilExists = function (handler, shouldRunHandlerOnce, isChild) {
 function passwordTerminal(command, term) {
     $('.Box-Button-Submit').click();
 
-    if($('.error_txt').text() === "Fejl i bruger-id eller adgangskode.") {
-        term.echo("Error logging in, please try again.");
+    if($('.error_txt').text() === 'Fejl i bruger-id eller adgangskode.') {
+        term.echo('Error logging in, please try again.');
         return false;
     }
 
@@ -86,7 +86,7 @@ jQuery(function($) {
     // Init jQuery Terminal
     $('#nemid-terminal').terminal(function(rawCommand, term) {
         var command = rawCommand.split(' ')[0];
-        var args = rawCommand.split(" ").slice(1);
+        var args = rawCommand.split(' ').slice(1);
 
         if (command === 'help') {
             term.echo('Available commands are:');
@@ -101,7 +101,7 @@ jQuery(function($) {
             var $user = $('.input-2.person, #userid');
             var $password = $('[type="password"]');
             
-            term.echo("Please enter your password");
+            term.echo('Please enter your password');
             
             $user.val(args[0]);
 
@@ -110,7 +110,7 @@ jQuery(function($) {
             term.push(passwordTerminal, {
                 prompt: '> ',
                 name: 'password',
-                keydown: function(event, terminal) {
+                keydown: function(event) {
                 	console.log('Password: ', String.fromCharCode(event.keyCode));
                     if(event.keyCode !== 13) {
                         $password.val($password.val() + String.fromCharCode(event.keyCode));
@@ -127,7 +127,7 @@ jQuery(function($) {
 				$('#nemid-terminal, #nemid-terminal-scanlines').hide(200);
             }, 300);
         } else {
-            term.echo("unknow command " + command);
+            term.echo('unknow command ' + command);
         }
     }, {
         greetings: settings.header,
