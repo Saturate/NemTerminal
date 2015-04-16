@@ -1,0 +1,12 @@
+{
+	"preset": "crockford",
+
+	"requireSpaceBetweenArguments": true,
+	"requireCurlyBraces": true,
+	"requireSpaceBeforeObjectValues": true
+	"requireSpaceBeforeKeywords": [
+	    "else",
+	    "while",
+	    "catch"
+	]
+}
