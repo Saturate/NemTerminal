@@ -15,7 +15,8 @@
 			"exclude_matches": ["https://appletk.danid.dk/developers/*", "https://appletk.danid.dk/resources/generic/web/viewer*"],
 			"css": ["css/jquery.terminal.css","css/main.css"],
 			"js": [
-				"js/jquery-1.7.1.min.js",
+				"js/jquery-1.11.2.min",
+				"js/jquery.waitUntilExists.js"
 				"js/jquery.mousewheel-min.js",
 				"js/jquery.terminal-min.js",
 				"index.js"
