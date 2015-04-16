@@ -8,7 +8,7 @@
 	"content_scripts": [
 		{
 			"matches": ["https://appletk.danid.dk/*", "https://applet.danid.dk/*"],
-			"exclude_matches": ["https://appletk.danid.dk/developers/examples/*", "https://appletk.danid.dk/resources/generic/web/viewer*"],
+			"exclude_matches": ["https://appletk.danid.dk/developers/*", "https://appletk.danid.dk/resources/generic/web/viewer*"],
 			"css": ["css/jquery.terminal.css","css/main.css"],
 			"js": [
 				"js/jquery-1.7.1.min.js",
