@@ -1,22 +1,21 @@
 {
 	"manifest_version": 2,
 	"name": "NemTerminal",
-	"version": "1.0.0",
-
-	"icons": {	"16": "icon16.png",
-				"48": "icon48.png",
-				"128": "icon128.png" },
-
+	"version": "1.0.1",
+	"icons": {
+		"16": "icon16.png",
+		"48": "icon48.png",
+		"128": "icon128.png"
+	},
 	"description": "Makes loggin in to NemID more Terminalish.",
-
 	"content_scripts": [
 		{
 			"matches": ["https://appletk.danid.dk/*", "https://applet.danid.dk/*"],
 			"exclude_matches": ["https://appletk.danid.dk/developers/*", "https://appletk.danid.dk/resources/generic/web/viewer*"],
 			"css": ["css/jquery.terminal.css","css/main.css"],
 			"js": [
-				"js/jquery-1.11.2.min",
-				"js/jquery.waitUntilExists.js"
+				"js/jquery-1.11.2.min.js",
+				"js/jquery.waitUntilExists.js",
 				"js/jquery.mousewheel-min.js",
 				"js/jquery.terminal-min.js",
 				"index.js"
@@ -24,5 +23,5 @@
 			"run_at": "document_start",
 			"all_frames": true
 		}
-	  ]
+	]
 }
