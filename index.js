@@ -11,8 +11,11 @@
     function passwordTerminal(command, term) {
         $(settings.submitBtnSelector).click();
 
-        if($('.error_txt').text() === 'Fejl i bruger-id eller adgangskode.') {
+        // If we detect a error we should handle this.
+        // Right now we look for strings there might be a smarter way.
+        if($('.error_txt').text() === 'Fejl i bruger-id eller adgangskode.' || $('.forverifier.error_txt').text() === 'Fejl i bruger-id eller adgangskode.') {
             term.echo('Error logging in, please try again.');
+            term.pop(); // Go back as we need to enter the username again
             return false;
         }
 
